@@ -102,7 +102,37 @@ r = model.fit(
 plt.plot(r.history['accuracy'], label='acc', color='red')
 plt.plot(r.history['val_accuracy'], label='val_acc', color='green')
 plt.legend()
+plt.show()
 
 # save the model
 model.save('ChaiPaw.h5')
 print("Model Successfully Saved!")
+
+#To Test our Software
+# label mapping
+ 
+labels = '''airplane automobile bird cat deerdog frog horse ship truck'''.split()
+ 
+# select the image from our test dataset
+image_number = 101
+ 
+# display the image
+plt.imshow(x_test[image_number+1])
+plt.show()
+ 
+# load the image in an array
+n = np.array(x_test[image_number])
+ 
+# reshape it
+p = n.reshape(1, 32, 32, 3)
+ 
+# pass in the network for prediction and
+# save the predicted label
+predicted_label = labels[model.predict(p).argmax()]
+ 
+# load the original label
+original_label = labels[y_test[image_number]]
+ 
+# display the result
+print("Original label is {} and predicted label is {}".format(
+    original_label, predicted_label))
